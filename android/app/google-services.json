@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "907034913476",
+    "project_id": "blackcoffer-7334b",
+    "storage_bucket": "blackcoffer-7334b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907034913476:android:0462e82e6e421eb90e7791",
+        "android_client_info": {
+          "package_name": "com.example.blackcoffer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907034913476-jo0n472lsu2152fskfd5p4hfa1jho5iu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.blackcoffer",
+            "certificate_hash": "aa9c5bd9cdfa1f4a985bc5d3e98f66d6b5867014"
+          }
+        },
+        {
+          "client_id": "907034913476-ciico618lte54admle5u6t0suced1b55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGjGLFC55fI4w3j_y94RuLwbs8ESkYHrI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907034913476-ciico618lte54admle5u6t0suced1b55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
