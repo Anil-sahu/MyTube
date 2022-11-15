@@ -9,6 +9,7 @@ class LoginController extends GetxController{
   var userName = "".obs;
   var mobile ="".obs;
   var id = "".obs;
+  var totalLike =0.obs;
 
 @override
   onInit(){
@@ -30,6 +31,14 @@ verifyUpdate(values){
   isLodingUpdate(value){
     isLoading.value =value;
   }
+   currentUserId(id){
+    id.value = id;
+   }
+
+getTotalLike(like){
+  totalLike.value = like;
+}
+
 
 saveUserData(name,mobile,id)async{
   final preferences =await SharedPreferences.getInstance();

@@ -39,7 +39,7 @@ dependencies:
   geocoding: ^2.0.5
   geolocator: ^9.0.2
   get: ^4.6.5
-  camera: ^0.10.0+4
+  camera: 
   video_player: ^2.4.7
   firebase_auth:
   firebase_storage: ^11.0.4
@@ -47,6 +47,7 @@ dependencies:
   firebase_core: ^2.1.1
   pinput: ^2.2.16
   shared_preferences: ^2.0.15
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_test:

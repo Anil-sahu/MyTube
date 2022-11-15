@@ -40,6 +40,7 @@ _recordVideo() async {
       fullscreenDialog: true,
       builder: (_) => VideoPage(filePath: file.path,file:myFile),
     );
+    // ignore: use_build_context_synchronously
     Navigator.push(context, route);
   } else {
     await _cameraController.prepareForVideoRecording();

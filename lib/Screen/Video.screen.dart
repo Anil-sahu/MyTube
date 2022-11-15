@@ -1,10 +1,11 @@
+import 'package:blackcoffer/controller/instance.dart';
 import 'package:blackcoffer/widgets/videoplay.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class PlayVideoScreen extends StatefulWidget {
-  const PlayVideoScreen({super.key});
+ var data;
+  
+   PlayVideoScreen({super.key, this.data,});
 
   @override
   State<PlayVideoScreen> createState() => _PlayVideoScreenState();
@@ -13,8 +14,10 @@ class PlayVideoScreen extends StatefulWidget {
 class _PlayVideoScreenState extends State<PlayVideoScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: PlyCard(),
+    print(InstanceMemb.loginController.id.value);
+    return  Scaffold(
+      body: PlyCard(data:widget.data,),
+      
     );
   }
 }

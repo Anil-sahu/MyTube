@@ -1,15 +1,26 @@
 import 'package:blackcoffer/Screen/Video.screen.dart';
+import 'package:blackcoffer/service/Vidoplayer.service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 
 class VideoCard extends StatefulWidget {
-  const VideoCard({super.key});
+  var data;
+
+   VideoCard({super.key,required this.data});
 
   @override
   State<VideoCard> createState() => _VideoCardState();
 }
 
 class _VideoCardState extends State<VideoCard> {
+  VideoPlayerService
+   vds = VideoPlayerService();
+   @override
+  void initState() {
+  vds.initVideoPlayer(widget.data['url']);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,11 +29,13 @@ class _VideoCardState extends State<VideoCard> {
         children: [
           InkWell(
             onTap: (){
-              Get.to(()=>const PlayVideoScreen());
+              print(widget.data['like']['countLike']);
+              Get.to(()=>PlayVideoScreen(data:widget.data,));
             },
             child: Container(
               height: 300,
               color: const Color.fromARGB(255, 233, 233, 233),
+              child: VideoPlayer(vds.videoPlayerController),
             ),
           ),
           Container(
@@ -37,9 +50,9 @@ class _VideoCardState extends State<VideoCard> {
                         backgroundColor: Colors.grey,
                         radius: 20,
                       ),
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("Title of Video Here"),
+                        child: Text(widget.data['title']),
                       )
                     ],
                   ),

@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(250, 29, 29, 29),
+      backgroundColor: const Color.fromARGB(248, 20, 20, 20),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -53,9 +53,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: width,
                   height: width,
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius:
-                        BorderRadius.only(bottomLeft: Radius.circular(width)),
+                    color: const Color.fromARGB(255, 0, 55, 207),
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(width),
+                      // topLeft: Radius.circular(width),
+                    ),
                   )),
             ),
             Container(
@@ -63,9 +65,44 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Image.asset(
-                    "assets/logo.png",
+                  Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        margin: const EdgeInsets.all(20),
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color.fromARGB(255, 0, 0, 0)),
+                        child: const Icon(
+                          Icons.person_rounded,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          size: 100,
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 23),
+                        child:
+                            Obx(() => InstanceMemb.loginController.isLogin.value
+                                ? const Text(
+                                    "Verification",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                : const Text(
+                                    "Login With Mobile",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                      )
+                    ],
                   ),
+                  // Image.asset(
+                  //   "assets/logo.png",
+                  // ),
                   Obx(
                     () => InstanceMemb.loginController.isLoading.value
                         ? const Center(
@@ -74,32 +111,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         : Obx(() => InstanceMemb.loginController.isLogin.value
                             ? Column(
                                 children: [
-                                  Column(
-                                    children: [
-                                      const Text(
-                                        "Verification",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      const Text(
-                                        "Enter the code send to the number",
-                                        style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 177, 177, 177),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "+91 ${mobile.text}",
-                                        style: const TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 231, 231, 231),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold),
-                                      )
-                                    ],
+                                  Container(
+                                    margin: EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        const Text(
+                                          "Enter the code send to the number",
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 177, 177, 177),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          "+91 ${mobile.text}",
+                                          style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 231, 231, 231),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                   Directionality(
                                     // Specify direction if desired
@@ -176,10 +209,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                             UserData user = UserData(
                                                 username: name.text,
                                                 mobile: mobile.text.trim());
-                                            PushData pushData = PushData();
-                                            pushData.pushUserData(user);
-                                            login.signIn(smsCode.text.trim());
-                                            InstanceMemb.loginController.saveUserData(name.text, mobile.text.trim(), mobile.text.trim());
+                                          
+                                           
+                                            login.signIn(smsCode.text.trim(),
+                                                user);
+                                             
+                                                 ;
                                           },
                                           child: const Text(
                                             "Verify",
@@ -197,29 +232,49 @@ class _LoginScreenState extends State<LoginScreen> {
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Container(
-                                    margin: const EdgeInsets.all(20),
-                                    child: TextButton(
-                                        onPressed: () {
-                                          // print(mobile.text);
-                                          if (mobile.text.trim().isNotEmpty) {
-                                            login.verifyPhoneNumber(
-                                                mobile.text.trim());
-                                          } else {
-                                            Get.showSnackbar(const GetSnackBar(
-                                              titleText: Text(
-                                                  "Phone Number and username canot be empty"),
-                                              messageText: null,
-                                            ));
-                                          }
-                                        },
-                                        child: const Text(
-                                          "Resend OTP",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        // print(mobile.text);
+                                        InstanceMemb.loginController
+                                            .isLodingUpdate(true);
+                                        if (mobile.text.trim().isNotEmpty) {
+                                          login.verifyPhoneNumber(
+                                              mobile.text.trim());
+                                        } else {
+                                          Get.showSnackbar(const GetSnackBar(
+                                            titleText: Text(
+                                                "Phone Number and username canot be empty"),
+                                            messageText: null,
+                                          ));
+                                        }
+                                      },
+                                      child: const Text(
+                                        "Resend OTP",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor:
+                                                  Colors.transparent),
+                                          onPressed: () {
+                                            InstanceMemb.loginController
+                                                .signInStep(false);
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.arrow_back_ios,
+                                                color: Colors.white,
+                                              ),
+                                              Text("Back")
+                                            ],
+                                          ))
+                                    ],
+                                  )
                                 ],
                               )
                             : Column(
@@ -262,12 +317,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   .isLodingUpdate(true);
                                               login.verifyPhoneNumber(
                                                   user.mobile);
-                                            }else{
-                                                Get.showSnackbar(const GetSnackBar(
-                                              titleText: Text(
-                                                  "Phone Number and username canot be empty"),
-                                              messageText: null,
-                                            ));
+                                            } else {
+                                              Get.showSnackbar(
+                                                  const GetSnackBar(
+                                                titleText: Text(
+                                                    "Phone Number and username canot be empty"),
+                                                messageText: null,
+                                              ));
                                             }
 
                                             // setState(() {

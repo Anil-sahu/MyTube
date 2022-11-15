@@ -15,9 +15,16 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   
-  List<Widget> pageList =[const HomScreen(),const PlayVideoScreen()];
+  List<Widget> pageList =[const HomScreen(),PlayVideoScreen()];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    print("-------------------------------uid");
+    print(InstanceMemb.loginController.mobile.value);
     return Scaffold(
                 appBar: PreferredSize(
         preferredSize:  const Size(100, 160),

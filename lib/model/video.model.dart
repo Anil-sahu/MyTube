@@ -6,6 +6,8 @@ class Video {
   String description = "";
   String location = "";
   String category = "";
+  String userId = "";
+  List<Views> views = [];
   List<Like> like = [];
   List<Dislike> disLike = [];
   List<Comment> comments = [];
@@ -13,9 +15,11 @@ class Video {
       {required this.videoUrl,
       required this.title,
       required this.category,
-      required this.description});
+      required this.description,
+      required this.userId});
 
   Video.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
     title = json['title'];
     videoUrl = json['url'];
     postDate = json['postDate'];
@@ -38,48 +42,66 @@ class Video {
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['userId'] = userId;
     data['title'] = title;
     data['description'] = description;
     data['url'] = videoUrl;
     data['postDate'] = postDate;
-    data['like'] = like;
-    data['dislike'] = disLike;
+    data['like'] = {
+      "countLike": 0,
+      "user": like,
+    };
+    data['views']={
+      "countView":0,
+      "user":views
+
+    };
+    data['dislike'] = {
+      "countDislike": 0,
+      "user": disLike,
+    };
     data['category'] = category;
-    data['comment'] = comments;
+    data['comment'] = {
+      "countComment": 0,
+      "user": comments,
+    };
     return data;
   }
 }
 
 class Like {
-  bool isLike = false;
   String? username;
-  Like({required this.isLike, this.username});
+  Like({required this.username});
   Like.fromJson(Map<String, dynamic> json) {
-    isLike = json['isLike'];
     username = json['username'];
   }
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
-    data['isLike'] = isLike;
+
     data['username'] = username;
     return data;
   }
 }
 
 class Dislike {
-  bool isDislike = false;
   String? username;
-  Dislike({required this.isDislike, this.username});
+  Dislike({required this.username});
   Dislike.fromJson(Map<String, dynamic> json) {
-    isDislike = json['isDislike'];
     username = json['username'];
   }
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
-    data['disLike'] = isDislike;
+
     data['username'] = username;
     return data;
   }
+}
+
+class Views {
+  String user = "";
+  
+  Views({required this.user});
+  
 }
 
 class Comment {
