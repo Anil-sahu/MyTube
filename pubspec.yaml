@@ -48,6 +48,9 @@ dependencies:
   pinput: ^2.2.16
   shared_preferences: ^2.0.15
   image_picker: ^0.8.6
+  flutter_staggered_animations: ^1.1.1
+
+ 
 
 dev_dependencies:
   flutter_test:

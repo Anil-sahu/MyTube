@@ -1,12 +1,13 @@
 
 import 'dart:async';
 
+import 'package:blackcoffer/controller/instance.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GPService{  
   var lat, long, address;
-  var city, state, country;
+  
   late StreamSubscription<Position> streamSubscription;
   getLocation() async {
     bool serviceEnabled;
@@ -41,14 +42,21 @@ class GPService{
   }
 
   Future getAddress(Position position) async {
-    List<Placemark> placemark =
+    try{
+  List<Placemark> placemark =
         await placemarkFromCoordinates(position.latitude, position.longitude);
     Placemark place = placemark[0];
-    
-      city = place.locality;
-      state = place.administrativeArea;
-      country = place.country;
+   
+    InstanceMemb.videoController.getLocation( "${place.locality} (${place.administrativeArea})");
+    }catch(error){
+      // ignore: avoid_print
+      print(error.toString());
+
+    }
   
+    
+    
+   
   }
 
 

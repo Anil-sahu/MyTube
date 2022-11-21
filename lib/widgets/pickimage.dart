@@ -3,10 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
-
-    
-
    class ImagePickerClass{
 
   var fileUrl;
@@ -15,14 +11,11 @@ import 'package:image_picker/image_picker.dart';
   var image;
 
 
-  Future getImages(inputSource) async {
+  Future getImages() async {
     
     var _picker = ImagePicker();
     var img = await _picker.pickImage(
-      source:
-          inputSource == "camera" ? ImageSource.camera : ImageSource.gallery,
-      maxWidth: 150,
-      maxHeight: 150,
+      source: ImageSource.gallery,
     );
  
       image = File(img!.path);
@@ -31,48 +24,48 @@ import 'package:image_picker/image_picker.dart';
 
 
 
-pickimages(context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            backgroundColor: Colors.white,
-            title: const Text("Pick image from"),
-            // content: Text("Pick from any one"),
-            actions: [
-              //   color: backColor[200],
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        var camera = "camera";
-                        getImages(camera);
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.camera_alt,
-                        size: 45,
-                        color:Colors.black,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        var camera = "gallery";
-                        getImages(camera);
-                        Navigator.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.image,
-                        size: 45,
-                        color:Colors.red,
-                      )),
-                ],
-              ),
-            ],
-          );
-        });
-  }
+// pickimages(context) async {
+//     return showDialog(
+//         context: context,
+//         builder: (context) {
+//           return AlertDialog(
+//             backgroundColor: Colors.white,
+//             title: const Text("Pick image from"),
+//             // content: Text("Pick from any one"),
+//             actions: [
+//               //   color: backColor[200],
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   IconButton(
+//                       onPressed: () {
+//                         var camera = "camera";
+//                         getImages(camera);
+//                         Navigator.of(context).pop();
+//                       },
+//                       icon: Icon(
+//                         Icons.camera_alt,
+//                         size: 45,
+//                         color:Colors.black,
+//                       )),
+//                   IconButton(
+//                       onPressed: () {
+//                         var camera = "gallery";
+//                         getImages(camera);
+//                         Navigator.of(context).pop();
+//                       },
+//                       icon: Icon(
+//                         Icons.image,
+//                         size: 45,
+//                         color:Colors.red,
+//                       )),
+//                 ],
+//               ),
+//             ],
+//           );
+//         });
+//   }
 
 
 

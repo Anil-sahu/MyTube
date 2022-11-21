@@ -1,27 +1,33 @@
 class Video {
   String title = "";
-
+  
   String videoUrl = "";
+  String thumbnail="";
   DateTime? postDate = DateTime.now();
   String description = "";
   String location = "";
   String category = "";
   String userId = "";
+  String userName ="";
   List<Views> views = [];
   List<Like> like = [];
   List<Dislike> disLike = [];
   List<Comment> comments = [];
   Video(
       {required this.videoUrl,
+     required this.thumbnail,
       required this.title,
       required this.category,
       required this.description,
-      required this.userId});
+      required this.userId,
+      required this.location,
+      required this.userName});
 
   Video.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
     title = json['title'];
     videoUrl = json['url'];
+    thumbnail = json['thumbnail'];
     postDate = json['postDate'];
     description = json['description'];
     location = json['location'];
@@ -45,8 +51,11 @@ class Video {
     data['userId'] = userId;
     data['title'] = title;
     data['description'] = description;
+    data['thumbnail']=thumbnail;
     data['url'] = videoUrl;
     data['postDate'] = postDate;
+    data['username']=userName;
+    data['location']=location;
     data['like'] = {
       "countLike": 0,
       "user": like,
@@ -61,7 +70,7 @@ class Video {
       "user": disLike,
     };
     data['category'] = category;
-    data['comment'] = {
+    data['comments'] = {
       "countComment": 0,
       "user": comments,
     };
@@ -108,16 +117,25 @@ class Comment {
   String? username;
   DateTime commentDate = DateTime.now();
   String? comment;
+  List<Reply> reply =[];
+  Comment({required this.username,required this.comment,required this.commentDate});
   Map<String, dynamic> toMap() {
     Map<String, dynamic> data = {};
     data['comment'] = comment;
     data['username'] = username;
     data['commentDate'] = commentDate;
+    data['reply']=reply;
     return data;
   }
 }
 
 
+class Reply{
+  String user="";
+  String reply="";
+  DateTime replayDate =DateTime.now();
+
+}
 
 
   //  onPressed: isPostLiked == true ? () {

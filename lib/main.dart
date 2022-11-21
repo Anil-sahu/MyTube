@@ -6,9 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   if (!kIsWeb) {
     await Firebase.initializeApp();
   } else {
@@ -25,7 +25,7 @@ void main() async{
       ),
     );
   }
-InstanceMemb.loginController.getUserData();
+  InstanceMemb.loginController.getUserData();
 
   runApp(const MyApp());
 }
@@ -39,13 +39,20 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'BlackCoffer',
       theme: ThemeData(
-    primaryColor: Colors.white,
-    accentColor: Colors.black45,
-    appBarTheme: const AppBarTheme(backgroundColor: Color.fromARGB(255, 245, 245, 245),),
-    progressIndicatorTheme:const ProgressIndicatorThemeData(circularTrackColor: Colors.white)
+        primaryColor: const Color.fromARGB(255, 54, 54, 54),
+        accentColor: Colors.black45,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 245, 245, 245),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Color.fromARGB(255, 1, 45, 243)),
+        progressIndicatorTheme:
+            const ProgressIndicatorThemeData(circularTrackColor: Colors.white),
       ),
-      home: Obx(() => InstanceMemb.loginController.userName.value!=""&&
-      InstanceMemb.loginController.mobile.value!=""?const MainScreen():const LoginScreen()),
+      home: Obx(() => InstanceMemb.loginController.userName.value != "" &&
+              InstanceMemb.loginController.mobile.value != ""
+          ? const MainScreen()
+          : const LoginScreen()),
       debugShowCheckedModeBanner: false,
     );
   }

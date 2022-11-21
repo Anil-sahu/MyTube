@@ -42,7 +42,7 @@ class _TextFieldsState extends State<TextFields> {
           decoration: BoxDecoration(boxShadow: [
             const BoxShadow(
                 offset: Offset(0, 0),
-                color: Colors.white,
+                color: Color.fromARGB(0, 255, 255, 255),
                 blurRadius: 2,
                 spreadRadius: 0)
           ], borderRadius: BorderRadius.circular(12)),
@@ -50,19 +50,19 @@ class _TextFieldsState extends State<TextFields> {
               controller: widget.controller,
               keyboardType: widget.keyType,
               style: const TextStyle(
-                  color: Color.fromARGB(244, 180, 180, 180),
+                  color: Color.fromARGB(111, 248, 248, 248),
                   fontWeight: FontWeight.bold,
                   fontSize: 20),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
                 filled: true,
-                fillColor: const Color.fromARGB(255, 250, 250, 250),
+                fillColor: const Color.fromARGB(66, 250, 250, 250),
                 suffixIcon: Icon(widget.suf, color: const Color.fromARGB(246, 194, 193, 193)),
 
                 prefixIcon: Icon(
                   widget.pref,
-                  color: const Color.fromARGB(193, 99, 98, 98),
+                  color: const  Color.fromARGB(246, 194, 193, 193),
                 ),
                 hintText: widget.hint,
                 hintStyle: const TextStyle(color: Color.fromARGB(255, 190, 190, 190),fontSize: 16),

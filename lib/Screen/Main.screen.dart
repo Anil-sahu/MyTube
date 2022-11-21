@@ -1,6 +1,6 @@
 import 'package:blackcoffer/Screen/Home.screen.dart';
-import 'package:blackcoffer/Screen/Video.screen.dart';
 import 'package:blackcoffer/Screen/Camera.screen.dart';
+import 'package:blackcoffer/service/location.service.dart';
 import 'package:blackcoffer/widgets/bottumNavBar.component.dart';
 import 'package:blackcoffer/controller/instance.dart';
 import 'package:flutter/material.dart';
@@ -14,99 +14,58 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  
-  List<Widget> pageList =[const HomScreen(),PlayVideoScreen()];
+  List<Widget> pageList = [const HomScreen(), const Center(child: Text("Not implemented"),)];
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    print("-------------------------------uid");
-    print(InstanceMemb.loginController.mobile.value);
+   
     return Scaffold(
-                appBar: PreferredSize(
-        preferredSize:  const Size(100, 160),
-        child: Card(
-          child: Column(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 40),
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "BlackCoffer",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 77, 76, 76)
-                          ),
-                    ),
+      backgroundColor: const Color.fromARGB(255, 235, 233, 233),
+      appBar: PreferredSize(
+        preferredSize: const Size(100, 60),
+        child: 
+           AppBar(
+            elevation: 0,
+                  title: const Text("BlackCoffer",style: TextStyle(color: Color.fromARGB(255, 22, 22, 22),fontWeight: FontWeight.bold),),
+                  leading: Image.asset('assets/logo.png'),
+                  backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+                  actions: [
                     IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.notifications,
-                          color: Color.fromARGB(255, 92, 91, 91),
-                        ))
+                        onPressed: () {
+                          InstanceMemb.videoController.isSearchUpdate(true);
+                        }, icon:  Obx(()=>InstanceMemb.videoController.isSearch.value?const SizedBox(): const Icon(Icons.search_rounded,color: Color.fromARGB(255, 59, 59, 59),))),
+                    IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.notifications,color: Color.fromARGB(255, 61, 61, 61),)),
+                    Container(
+                      margin: const EdgeInsets.all(12),
+                      decoration: const BoxDecoration(shape: BoxShape.circle,color: Color.fromARGB(255, 1, 107, 247)),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.person_rounded,color: Color.fromARGB(255, 61, 61, 61),)),
+                    )
                   ],
                 ),
-              ),
         
-        
-           //---------------------Search TextField-----------------------------//         
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - 100,
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: TextField(
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          filled: true,
-                          prefixIcon: Icon(
-                            Icons.search,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                          hintText: "Search",
-                          suffixIcon: Icon(
-                            Icons.close,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                          hintStyle: TextStyle(color: Colors.white, fontSize: 20),
-                          fillColor: Color.fromARGB(255, 238, 237, 237)),
-                      cursorColor: const Color.fromARGB(255, 56, 108, 185),
-                      cursorWidth: 4,
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  const Text("Filter",style: TextStyle(color: Color.fromARGB(255, 77, 76, 76),fontSize: 20,fontWeight: FontWeight.bold),)
-                ],
-              ),
-              const Divider(
-              )
-            ],
-          ),
-        ),
       ),
-      body: Obx(()=> pageList[InstanceMemb.videoController.currentIndex.value]),
+
+  
+      body:
+          Obx(() => pageList[InstanceMemb.videoController.pagecurrentIndex.value]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Get.to(()=>CameraPage());
-      },child: Icon(Icons.add),),
-      bottomNavigationBar: BottomNavBar(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          GPService gps = GPService();
+          gps.getLocation();
+          Get.to(() => const CameraPage());
+        },
+        child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }
