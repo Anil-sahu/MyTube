@@ -1,3 +1,3 @@
 # MyTube
 
-A new Flutter project.
+This is a youtube clone applcation
