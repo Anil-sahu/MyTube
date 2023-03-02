@@ -100,9 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       )
                     ],
                   ),
-                  // Image.asset(
-                  //   "assets/logo.png",
-                  // ),
+             
                   Obx(
                     () => InstanceMemb.loginController.isLoading.value
                         ? const Center(
@@ -326,9 +324,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ));
                                             }
 
-                                            // setState(() {
-                                            //   isLogin=true;
-                                            // });
+                                    
                                           },
                                           child: const Text(
                                             "Login",
